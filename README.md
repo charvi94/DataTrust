@@ -1,4 +1,21 @@
 # DataTrust
+## Screenshots
+
+### Dashboard
+
+![DataTrust Dashboard](screenshots/dashboard.png)
+
+### Data Quality Analysis
+
+![Data Quality Analysis](screenshots/analysis.png)
+
+### Data Cleaning & Standardization
+
+![Data Cleaning & Standardization](screenshots/cleaning.png)
+
+### Data Quality Insights
+
+![Data Quality Insights](screenshots/insights.png)
 
 ## Smart Data Quality & Integrity Platform
 
