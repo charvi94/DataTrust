@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>DataTrust</title>
+
+
+    <!-- DataTrust CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <!-- Chart.js -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header>
+
+        <h1>DataTrust</h1>
+
+        <p>
+            Smart Data Quality &amp; Integrity Platform
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =====================================================
+             UPLOAD SECTION
+        ====================================================== -->
+
+        <section class="upload-section">
+
+            <h2>Analyze Your Dataset</h2>
+
+            <p>
+                Upload a CSV file to detect data-quality issues,
+                duplicates and calculate a quality score.
+            </p>
+
+
+            <input
+                type="file"
+                id="fileInput"
+                accept=".csv"
+            >
+
+
+            <button id="analyzeButton">
+                Analyze Dataset
+            </button>
+
+
+            <button id="cleanButton">
+                Clean &amp; Standardize Dataset
+            </button>
+
+
+            <p id="status"></p>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             RESULTS
+        ====================================================== -->
+
+        <section
+            id="results"
+            class="results-section"
+        >
+
+
+            <!-- =================================================
+                 CLEANING SUMMARY
+            ================================================== -->
+
+            <div id="cleaningReport">
+
+                <h2>
+                    Cleaning Summary
+                </h2>
+
+
+                <div class="cards">
+
+                    <div class="card">
+
+                        <h3>
+                            Records Processed
+                        </h3>
+
+                        <p id="recordsProcessed">
+                            -
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Names Standardized
+                        </h3>
+
+                        <p id="namesStandardized">
+                            -
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Emails Standardized
+                        </h3>
+
+                        <p id="emailsStandardized">
+                            -
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Phones Standardized
+                        </h3>
+
+                        <p id="phonesStandardized">
+                            -
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Cities Standardized
+                        </h3>
+
+                        <p id="citiesStandardized">
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <h2>
+                    Before → After Preview
+                </h2>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Field</th>
+
+                                <th>Before</th>
+
+                                <th>After</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="cleaningPreviewBody">
+
+                            <tr>
+
+                                <td colspan="3">
+                                    No cleaning performed yet.
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANALYSIS RESULTS
+            ================================================== -->
+
+            <h2>
+                Analysis Results
+            </h2>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>
+                        Total Records
+                    </h3>
+
+                    <p id="totalRecords">
+                        -
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Missing Values
+                    </h3>
+
+                    <p id="missingValues">
+                        -
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Invalid Emails
+                    </h3>
+
+                    <p id="invalidEmails">
+                        -
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Invalid Phones
+                    </h3>
+
+                    <p id="invalidPhones">
+                        -
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Duplicate Records
+                    </h3>
+
+                    <p id="duplicateRecords">
+                        -
+                    </p>
+
+                </div>
+
+
+                <div class="card score-card">
+
+                    <h3>
+                        Data Quality Score
+                    </h3>
+
+
+                    <div class="score-circle">
+
+                        <span id="qualityScore">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <p id="qualityLabel">
+                        Waiting for analysis
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NEW: DATA QUALITY INSIGHTS
+            ================================================== -->
+
+            <section class="insights-section">
+
+                <h2>
+                    Data Quality Insights
+                </h2>
+
+
+                <p class="section-description">
+
+                    Visual overview of dataset quality,
+                    detected issues and geographic distribution.
+
+                </p>
+
+
+                <div class="charts-grid">
+
+
+                    <!-- ISSUE DISTRIBUTION -->
+
+                    <div class="chart-card">
+
+                        <h3>
+                            Issue Distribution
+                        </h3>
+
+                        <div class="chart-wrapper">
+
+                            <canvas
+                                id="issueDistributionChart"
+                            ></canvas>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- QUALITY SCORE -->
+
+                    <div class="chart-card">
+
+                        <h3>
+                            Quality Score
+                        </h3>
+
+                        <div class="chart-wrapper">
+
+                            <canvas
+                                id="qualityScoreChart"
+                            ></canvas>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RECORDS BY CITY -->
+
+                    <div class="chart-card">
+
+                        <h3>
+                            Records by City
+                        </h3>
+
+                        <div class="chart-wrapper">
+
+                            <canvas
+                                id="cityDistributionChart"
+                            ></canvas>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CLEANING IMPACT -->
+
+                    <div class="chart-card">
+
+                        <h3>
+                            Cleaning Impact
+                        </h3>
+
+                        <div class="chart-wrapper">
+
+                            <canvas
+                                id="cleaningImpactChart"
+                            ></canvas>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ISSUE MANAGEMENT
+            ================================================== -->
+
+            <section class="issues-management-section">
+
+                <h2>
+                    Data Quality Issue Management
+                </h2>
+
+
+                <p class="section-description">
+
+                    Review detected data-quality problems,
+                    their severity and recommended actions.
+
+                </p>
+
+
+                <div class="cards">
+
+                    <div class="card">
+
+                        <h3>
+                            Total Issues
+                        </h3>
+
+                        <p id="totalIssues">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Missing Values
+                        </h3>
+
+                        <p id="summaryMissing">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Invalid Emails
+                        </h3>
+
+                        <p id="summaryEmails">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Invalid Phones
+                        </h3>
+
+                        <p id="summaryPhones">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Duplicate Records
+                        </h3>
+
+                        <p id="summaryDuplicates">
+                            0
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="issue-filter">
+
+                    <label for="issueFilter">
+                        Filter Issues:
+                    </label>
+
+
+                    <select id="issueFilter">
+
+                        <option value="all">
+                            All Issues
+                        </option>
+
+                        <option value="Missing Values">
+                            Missing Values
+                        </option>
+
+                        <option value="Invalid Emails">
+                            Invalid Emails
+                        </option>
+
+                        <option value="Invalid Phones">
+                            Invalid Phones
+                        </option>
+
+                        <option value="Duplicate Records">
+                            Duplicate Records
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        id="clearIssueFilter"
+                        type="button"
+                    >
+                        Clear Filter
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Record</th>
+
+                                <th>Customer ID</th>
+
+                                <th>Issue Type</th>
+
+                                <th>Field</th>
+
+                                <th>Severity</th>
+
+                                <th>Description</th>
+
+                                <th>Suggested Action</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="issuesTableBody">
+
+                            <tr>
+
+                                <td colspan="7">
+                                    No issues detected yet.
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 BASIC ISSUE BREAKDOWN
+            ================================================== -->
+
+            <div class="issues-section">
+
+                <h2>
+                    Data Quality Issues
+                </h2>
+
+
+                <div class="issue-row">
+
+                    <span>
+                        Missing Values
+                    </span>
+
+                    <strong id="issueMissing">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="issue-row">
+
+                    <span>
+                        Invalid Emails
+                    </span>
+
+                    <strong id="issueEmails">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="issue-row">
+
+                    <span>
+                        Invalid Phones
+                    </span>
+
+                    <strong id="issuePhones">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="issue-row">
+
+                    <span>
+                        Duplicate Records
+                    </span>
+
+                    <strong id="issueDuplicates">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DUPLICATES
+            ================================================== -->
+
+            <div class="duplicates-section">
+
+                <h2>
+                    Duplicate Records
+                </h2>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Customer ID</th>
+
+                                <th>Name</th>
+
+                                <th>Email</th>
+
+                                <th>Phone</th>
+
+                                <th>City</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="duplicatesTableBody">
+
+                            <tr>
+
+                                <td colspan="5">
+                                    No duplicates found
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOCATION
+            ================================================== -->
+
+            <div class="location-section">
+
+                <h2>
+                    Location Intelligence
+                </h2>
+
+
+                <p class="section-description">
+
+                    Geographic distribution of records
+                    in the dataset.
+
+                </p>
+
+
+                <div id="map"></div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CLEANING
+            ================================================== -->
+
+            <section class="cleaning-section">
+
+                <h2>
+                    Data Cleaning &amp; Standardization
+                </h2>
+
+
+                <p class="section-description">
+
+                    Clean and standardize your dataset by
+                    normalizing names, emails, phone numbers
+                    and city values.
+
+                </p>
+
+
+                <div class="cards">
+
+                    <div class="card">
+
+                        <h3>
+                            Original Records
+                        </h3>
+
+                        <p id="originalRecords">
+                            -
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Cleaned Records
+                        </h3>
+
+                        <p id="cleanedRecords">
+                            -
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Records Modified
+                        </h3>
+
+                        <p id="recordsChanged">
+                            -
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Cleaning Status
+                        </h3>
+
+                        <p id="cleaningStatus">
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <h2>
+                    Cleaned Dataset
+                </h2>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead id="cleanedTableHead">
+                        </thead>
+
+
+                        <tbody id="cleanedTableBody">
+
+                            <tr>
+
+                                <td>
+                                    Clean the dataset to view results.
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div id="downloadContainer"></div>
+
+            </section>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ==========================================================
+     LEAFLET
+=========================================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- ==========================================================
+     DATATRUST JAVASCRIPT
+=========================================================== -->
+
+<script
+    src="{{ url_for('static', filename='js/dashboard.js') }}"
+></script>
+
+
+</body>
+
+</html>

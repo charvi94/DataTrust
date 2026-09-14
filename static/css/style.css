@@ -1,0 +1,859 @@
+/* =========================================================
+   DATATRUST - PROFESSIONAL DASHBOARD
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container {
+    width: 92%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 30px 0 60px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    background: linear-gradient(
+        135deg,
+        #111827,
+        #1f2937
+    );
+
+    color: white;
+
+    padding: 45px 30px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.10);
+}
+
+header h1 {
+    font-size: 46px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 18px;
+    color: #d1d5db;
+}
+
+
+/* =========================================================
+   UPLOAD SECTION
+========================================================= */
+
+.upload-section {
+    background: white;
+
+    padding: 32px;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.upload-section h2 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.upload-section p {
+    color: #6b7280;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+input[type="file"] {
+    display: inline-block;
+
+    padding: 10px;
+
+    margin: 10px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #f9fafb;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button {
+    padding: 12px 22px;
+
+    margin: 6px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    background: #1f2937;
+
+    color: white;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.92;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+#status {
+    margin-top: 15px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+/* =========================================================
+   RESULTS CONTAINER
+========================================================= */
+
+.results-section {
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 16px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.results-section > h2,
+.results-section section > h2,
+.results-section > div > h2 {
+    font-size: 24px;
+
+    margin-top: 30px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+.card {
+    padding: 24px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+
+    text-align: center;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+.card h3 {
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #6b7280;
+
+    margin-bottom: 8px;
+}
+
+.card > p {
+    font-size: 30px;
+
+    font-weight: 800;
+
+    color: #111827;
+}
+
+
+/* =========================================================
+   QUALITY SCORE
+========================================================= */
+
+.score-card {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 220px;
+
+    border: 1px solid #d1d5db;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f9fafb,
+            #f3f4f6
+        );
+}
+
+.score-circle {
+    width: 125px;
+
+    height: 125px;
+
+    border-radius: 50%;
+
+    border: 10px solid #e5e7eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 12px 0;
+}
+
+.score-circle span {
+    font-size: 30px;
+
+    font-weight: 800;
+}
+
+#qualityLabel {
+    margin: 0;
+
+    font-size: 15px;
+
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   DATA QUALITY INSIGHTS
+========================================================= */
+
+.insights-section {
+    margin-top: 40px;
+
+    padding-top: 10px;
+}
+
+.insights-section h2 {
+    margin-bottom: 8px;
+}
+
+.charts-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 22px;
+
+    margin-top: 22px;
+}
+
+.chart-card {
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+.chart-card h3 {
+    font-size: 17px;
+
+    margin-bottom: 15px;
+
+    color: #374151;
+}
+
+.chart-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    height: 300px;
+}
+
+
+/* =========================================================
+   ISSUE MANAGEMENT
+========================================================= */
+
+.issues-management-section {
+    margin-top: 40px;
+
+    padding-top: 10px;
+}
+
+.issues-management-section .cards {
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(0, 1fr)
+        );
+}
+
+.issue-filter {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin: 20px 0;
+
+    padding: 18px;
+
+    background: #f8fafc;
+
+    border-radius: 10px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.issue-filter label {
+    font-weight: 600;
+}
+
+.issue-filter select {
+    padding: 10px 14px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: #374151;
+}
+
+.issue-filter button {
+    margin: 0;
+}
+
+
+/* =========================================================
+   ISSUE BREAKDOWN
+========================================================= */
+
+.issues-section {
+    margin-top: 40px;
+}
+
+.issue-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 16px 20px;
+
+    margin-bottom: 10px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+}
+
+.issue-row span {
+    font-size: 15px;
+
+    font-weight: 500;
+}
+
+.issue-row strong {
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 650px;
+}
+
+th,
+td {
+    padding: 13px 15px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    background: #f8fafc;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+td {
+    font-size: 14px;
+
+    color: #4b5563;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   DUPLICATES
+========================================================= */
+
+.duplicates-section {
+    margin-top: 40px;
+}
+
+
+/* =========================================================
+   LOCATION INTELLIGENCE
+========================================================= */
+
+.location-section {
+    margin-top: 40px;
+}
+
+.location-section h2 {
+    margin-bottom: 8px;
+}
+
+.section-description {
+    color: #6b7280;
+
+    margin-bottom: 20px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+#map {
+    width: 100%;
+
+    height: 450px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    border: 1px solid #d1d5db;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================================
+   CLEANING SECTION
+========================================================= */
+
+.cleaning-section {
+    margin-top: 40px;
+
+    padding-top: 10px;
+}
+
+.cleaning-section .cards {
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+}
+
+
+/* =========================================================
+   CLEANING STATUS
+========================================================= */
+
+#cleaningStatus {
+    font-size: 18px;
+
+    color: #166534;
+}
+
+
+/* =========================================================
+   DOWNLOAD BUTTON
+========================================================= */
+
+#downloadContainer {
+    margin-top: 20px;
+
+    text-align: center;
+}
+
+.download-button {
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    background: #1f2937;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.download-button:hover {
+    opacity: 0.9;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CLEANING PREVIEW
+========================================================= */
+
+#cleaningReport {
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   SPACING
+========================================================= */
+
+.location-section,
+.duplicates-section,
+.issues-section,
+.cleaning-section,
+.insights-section,
+.issues-management-section {
+    scroll-margin-top: 20px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .cards {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+    .issues-management-section .cards {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
+
+    .cleaning-section .cards {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: 95%;
+
+        padding-top: 15px;
+    }
+
+
+    header {
+        padding: 30px 20px;
+
+        border-radius: 14px;
+    }
+
+
+    header h1 {
+        font-size: 34px;
+    }
+
+
+    header p {
+        font-size: 15px;
+    }
+
+
+    .upload-section,
+    .results-section {
+        padding: 22px 18px;
+
+        border-radius: 12px;
+    }
+
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    .issues-management-section .cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    .cleaning-section .cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .chart-wrapper {
+        height: 280px;
+    }
+
+
+    .issue-filter {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .issue-filter select,
+    .issue-filter button {
+        width: 100%;
+
+        margin: 0;
+    }
+
+
+    #map {
+        height: 350px;
+    }
+
+
+    .score-card {
+        min-height: 200px;
+    }
+
+
+    button {
+        width: 100%;
+
+        margin: 5px 0;
+    }
+
+
+    input[type="file"] {
+        width: 100%;
+
+        margin: 10px 0;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 420px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .results-section h2,
+    .insights-section h2 {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card > p {
+        font-size: 27px;
+    }
+
+}
